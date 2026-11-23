@@ -7,6 +7,7 @@ from ball import Ball
 from zombie import Zombie
 import random
 
+
 boy = None
 
 
@@ -42,6 +43,7 @@ def init():
 #생성된 객체들의 충돌관계를 등록
     game_world.add_collision_pair('grass:ball', grass, None)
     game_world.add_collision_pair('boy:ball', boy, None)
+    game_world.add_collision_pair('zombie:ball', zombies , None)
     for ball in balls:
         game_world.add_collision_pair('boy:ball', None, ball)
 
