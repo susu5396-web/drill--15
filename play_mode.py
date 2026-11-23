@@ -32,18 +32,20 @@ def init():
     grass = Grass()
     global balls
     balls = [Ball(random.randint(100,1500),60,0) for _ in range(30)]
-    zombies = [Zombie() for _ in range(1)]
-    game_world.add_objects(zombies, 1)
+    zombie = [Zombie() for _ in range(1)]
 
 #생성된 객체들은 game_world 에 등록
     game_world.add_object(boy)
     game_world.add_object(grass, 0)
+    game_world.add_objects(zombie, 1)
     game_world.add_objects(balls, 1)
+
+    
 
 #생성된 객체들의 충돌관계를 등록
     game_world.add_collision_pair('grass:ball', grass, None)
     game_world.add_collision_pair('boy:ball', boy, None)
-    game_world.add_collision_pair('zombie:ball', zombies , None)
+    game_world.add_collision_pair('zombie:ball', zombie , None)
     for ball in balls:
         game_world.add_collision_pair('boy:ball', None, ball)
 

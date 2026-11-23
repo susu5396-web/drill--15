@@ -2,8 +2,11 @@ import random
 
 from pico2d import load_image, draw_rectangle, clamp
 
-import game_framework
 import game_world
+
+from ball import Ball
+import game_framework
+
 
 # 좀비 달리기 속력: km/h -> 픽셀/초
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
@@ -57,6 +60,16 @@ class Zombie:
 
     def get_bb(self):
         return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+
+    def fire_ball(self):
+        if self.item is None or self.ball_count <= 0:
+            return
+        self.ball_count -= 1
+        ball = Ball(self.x + self.face_dir * 40, self.y + 100, self.face_dir,
+                    1 if self.item == 'Ball' else 2)
+        game_world.add_object(ball, 1)
+        game_world.add_collision_pair('grass:ball', None, ball)
+        game_world.add_collision_pair('zombie:ball', None, ball)
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
