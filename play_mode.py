@@ -31,7 +31,7 @@ def init():
     grass = Grass()
     global balls
     balls = [Ball(random.randint(100,1500),60,0) for _ in range(30)]
-    zombies = [Zombie() for _ in range(4)]
+    zombies = [Zombie() for _ in range(1)]
     game_world.add_objects(zombies, 1)
 
 #생성된 객체들은 game_world 에 등록
