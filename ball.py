@@ -46,6 +46,6 @@ class Ball:
             self.stopped = True
         if group == 'boy:ball':
             game_world.remove_object(self) #공을 제거
-        if group == 'zombie:ball':
+        if group == 'zombie:fire_ball':
             game_world.remove_object(self)
             

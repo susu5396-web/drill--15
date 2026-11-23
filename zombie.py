@@ -3,7 +3,6 @@ import random
 from pico2d import load_image, draw_rectangle, clamp
 
 import game_world
-
 from ball import Ball
 import game_framework
 
@@ -37,6 +36,8 @@ class Zombie:
         self.x, self.y = random.randint(MIN_X, MAX_X), 150
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1, 1])
+    
+
         self.w = 200
         self.h = 200
 
@@ -60,21 +61,14 @@ class Zombie:
 
     def get_bb(self):
         return self.x - 100, self.y - 100, self.x + 100, self.y + 100
-
-    def fire_ball(self):
-        if self.item is None or self.ball_count <= 0:
-            return
-        self.ball_count -= 1
-        ball = Ball(self.x + self.face_dir * 40, self.y + 100, self.face_dir,
-                    1 if self.item == 'Ball' else 2)
-        game_world.add_object(ball, 1)
-        game_world.add_collision_pair('grass:ball', None, ball)
-        game_world.add_collision_pair('zombie:ball', None, ball)
+    
 
     def handle_collision(self, group, other):
+        ball = Ball()
+        game_world.add_object(ball, 1)
+        game_world.add_collision_pair('zombie:ball', None, ball)
         if group == 'zombie:ball':
-            self.w = 100
-            self.h = 100
+           pass
 
 
    
